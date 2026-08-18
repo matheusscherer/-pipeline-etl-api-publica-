@@ -1,21 +1,17 @@
 """
-Pipeline ETL - Cotação do Dólar (PTAX/Banco Central)
-======================================================
-Orquestra as 3 etapas do pipeline: Extract -> Transform -> Load.
+Orquestrador do Pipeline ETL - Cotação do Dólar (PTAX/Banco Central).
 
-Uso:
-    python3 pipeline.py
-
-Autor: Matheus Scherer
+Extract → Transform → Load
 """
-from extract import extrair_cotacoes
-from transform import transformar_cotacoes, gerar_agregado_semanal
-from load import carregar_no_banco
 import sqlite3
 import time
 
+from pipeline_etl.extract import extrair_cotacoes
+from pipeline_etl.transform import transformar_cotacoes, gerar_agregado_semanal
+from pipeline_etl.load import carregar_no_banco
 
-def rodar_pipeline(dias=30):
+
+def rodar_pipeline(dias: int = 30) -> str:
     inicio = time.time()
     print("=" * 60)
     print("PIPELINE ETL - COTAÇÃO DO DÓLAR (BANCO CENTRAL)")
@@ -52,5 +48,9 @@ def rodar_pipeline(dias=30):
     return caminho_db
 
 
-if __name__ == "__main__":
+def main() -> None:
     rodar_pipeline(dias=30)
+
+
+if __name__ == "__main__":
+    main()
